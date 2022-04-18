@@ -1,4 +1,3 @@
-
 class Graph:
     def __init__(self, nVertices):
         self.adjacencies = []
@@ -15,10 +14,10 @@ class Graph:
             self.vertices_no = self.vertices_no + 1
             if self.vertices_no > 1:
                 for vertex in self.adjacencies:
-                    vertex.append(0)
+                    vertex.append(-1)
             temp = []
             for i in range(self.vertices_no):
-                temp.append(0)
+                temp.append(-1)
             self.adjacencies.append(temp)
 
     def add_edge(self, v1, v2, e):
@@ -36,12 +35,11 @@ class Graph:
         total_weight = 0
         for i in range(self.vertices_no):
             for j in range(i, self.vertices_no):
-                if self.adjacencies[i][j] != 0:
+                if self.adjacencies[i][j] != -1:
                     total_weight += self.adjacencies[i][j]
                     print(i+1, " - ", j+1,
                           " edge weight: ", self.adjacencies[i][j])
         print("Total weight: ", total_weight)
-
 
     def checkCycle(self, v1, v2):
 
@@ -50,7 +48,7 @@ class Graph:
         queue = []
 
         for i in range(self.vertices_no):
-            if self.adjacencies[v1][i] != 0:
+            if self.adjacencies[v1][i] != -1:
                 queue.append(i)
 
         while len(queue) > 0:
@@ -59,13 +57,11 @@ class Graph:
                 return True
 
             for i in range(self.vertices_no):
-                if self.adjacencies[v][i] != 0 and i not in queue and checked.get(i) is None:
+                if self.adjacencies[v][i] != -1 and i not in queue and checked.get(i) is None:
                     queue.append(i)
                     checked[i] = True
 
         return False
-
-
 
     def kruskal(self):
         resul = Graph(self.vertices_no)
@@ -75,7 +71,7 @@ class Graph:
 
         for i in range(self.vertices_no):
             for j in range(i, self.vertices_no):
-                if self.adjacencies[i][j] != 0:
+                if self.adjacencies[i][j] != -1:
                     edges.append([self.adjacencies[i][j], i, j])
 
         edges = sorted(edges, key=lambda x: x[0], reverse=True)
@@ -90,6 +86,7 @@ class Graph:
                 nEdges = nEdges + 1
 
         return resul
+
 
 graph = Graph(6)
 
@@ -127,4 +124,3 @@ graph.add_edge(6, 7, 5)
 graph.print()
 # print(graph.adjacencies, graph.vertices)
 graph.kruskal().print()
-
