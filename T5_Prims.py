@@ -58,10 +58,10 @@ class Heap():
         self.nodes[idx] = x
         self.indexes[x.vertex] = idx
         self.bubbleUp(idx)
+
     def isEmpty(self):
         return True if self.size == 0 else False
 
-     # Standard function to extract minimum node from heap
     def extractMin(self) :
         min = self.nodes[1]
         lastNode = self.nodes[self.size]
